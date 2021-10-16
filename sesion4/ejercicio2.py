@@ -1,3 +1,4 @@
+import functools
 
 class Item():
     def __init__(self, nombre, price):
@@ -37,12 +38,16 @@ class Carrito():
 
     def pagar(self, metodo_pago):
         print(f"{self.calcular_total()} pagado con {metodo_pago}")
-
+        print(f"{self.func_calcular_total()} pagado con {metodo_pago}")
+        
     def calcular_total(self):
         total = 0
         for item in self.lista:
             total = total + item.total()
         return total
+
+    def func_calcular_total(self):
+        return functools.reduce(lambda x, y: x + y.total(), self.lista, 0)
 
 
 carrito1 = Carrito()
