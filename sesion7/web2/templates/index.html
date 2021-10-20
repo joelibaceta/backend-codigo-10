@@ -1,0 +1,16 @@
+{% extends "masterpage.html" %}
+
+{% import 'list_macro.html' as lista_macro %}
+
+{% block content %}
+    <h1>Hello World</h1>
+
+    {{ lista_macro.lista(tasks) }}
+{% endblock %}
+
+
+{% block footer %}
+    <center>
+        <small>Acme Inc Copyright</small>
+    </center>
+{% endblock %}
