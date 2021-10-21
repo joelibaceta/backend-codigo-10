@@ -15,6 +15,10 @@ def hello_world():
     tasks = TaskController.tasks
     return render_template("index.html", tasks=tasks)
 
+@app.route('/deletetask/<id>')
+def delete_task(id):
+    return TaskController.delete(id)
+
 @app.route('/tasks', methods = ['POST', 'GET'])
 def list_or_create():
     if request.method == 'GET':

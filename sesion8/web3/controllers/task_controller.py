@@ -2,6 +2,8 @@ from web3.models.task import Task
 
 from flask import redirect
 
+import json
+
 class TaskController:
 
     tasks = []
@@ -25,7 +27,27 @@ class TaskController:
 
 
     def update(id, req):
-        pass
+
+        body = json.loads(req.data.decode())
+
+        index = 0
+        for idx, task in enumerate(TaskController.tasks):
+            if int(task.id) == int(id):
+                index = idx
+
+        if "title" in body: 
+            title = body["title"]
+            TaskController.tasks[index].title = title
+
+        if "status" in body: 
+            status = body["status"]
+            TaskController.tasks[index].status = status
+
+        return "OK"
 
     def delete(id):
-        pass
+        for task in TaskController.tasks:
+            if int(task.id) == int(id):
+                print(f"Elimino: {task}")
+                TaskController.tasks.remove(task)
+        return redirect('/')
