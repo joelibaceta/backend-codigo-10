@@ -16,4 +16,15 @@ def hello_world():
 @app.route("/hello")
 def hello_name():
     name = request.args.get('name')
+    if name == None:
+        name = "Anonimo"
+    return f"<h1>Hello {name}</h1>"
+
+# URL Params
+# ==========
+#
+# localhost:5000/hello/Juan
+
+@app.route("/hello/<name>")
+def hello_name_2(name):
     return f"<h1>Hello {name}</h1>"

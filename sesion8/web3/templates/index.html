@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Task List</h1>
+    <form method="POST" action="/tasks">
+        <div class="mb-3">
+            <label for="taskname" class="form-label">Task Name</label>
+            <input class="form-control" id="taskname" name="taskname"> 
+        </div>
+        <button type="submit">Agregar</button>
+    </form>
+    <ul class="list-group">
+        {% for task in tasks %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ task.title }}
+            <a class="badge  btn-sm btn-danger">x</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
