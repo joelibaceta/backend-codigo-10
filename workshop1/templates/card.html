@@ -1,0 +1,21 @@
+{% macro moviecard(title, plot) %}
+
+<div class="movie_card" id="bright">
+    <div class="info_section">
+        <div class="movie_header">
+            <img class="locandina" src="{{cover_img}}"/>
+            <h1>{{title}}</h1>
+            <h4>{{year}}, {{director}}</h4>
+            <span class="minutes">{{length}} min</span>
+            <p class="type">{{genres}}</p>
+        </div>
+        <div class="movie_desc">
+        <p class="text">
+            {{plot}}
+        </p>
+        </div>
+    </div>
+    <div class="blur_back bright_back"></div>
+</div>
+
+{% endmacro %}
