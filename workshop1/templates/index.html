@@ -4,6 +4,6 @@
 
 {% block content %}
     {% for movie in movies %}
-        <p>{{ card.moviecard(movie[1], movie[2]) }}</p>
+        <p>{{ card.moviecard(*movie) }}</p>
     {% endfor %}
 {% endblock %}
