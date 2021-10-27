@@ -1,0 +1,11 @@
+<h1> Movies </h1>
+
+<table>
+    {% for row in rows %}
+        <tr>
+            {% for field in row %}
+                <td>{{field}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
