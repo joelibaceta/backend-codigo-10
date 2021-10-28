@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import render_template
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:rootcodigo@localhost/movies"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://developer:password@localhost/movies"
 db = SQLAlchemy(app)
 
 

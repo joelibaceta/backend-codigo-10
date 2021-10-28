@@ -1,0 +1,7 @@
+flask
+sqlalchemy
+flask-sqlalchemy
+pymysql
+flask-restful
+cryptography
+flask-marshmallow
