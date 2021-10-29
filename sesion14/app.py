@@ -22,7 +22,7 @@ from sesion14.controllers.categories_controller import CategoriesController
 from sesion14.controllers.category_controller import CategoryController
 from sesion14.controllers.authors_controller import AuthorsController
 from sesion14.controllers.author_controller import AuthorController
-
+from sesion14.controllers.books_by_category_controller import BooksByCategoryController
 
 api.add_resource(BooksController, "/books")
 api.add_resource(BookController, "/book/<id>")
@@ -31,4 +31,5 @@ api.add_resource(CategoryController, "/category/<id>")
 api.add_resource(AuthorsController, "/authors")
 api.add_resource(AuthorController, "/author/<id>")
 
+api.add_resource(BooksByCategoryController, "/category/<id>/books")
 # /category/<id>/books
