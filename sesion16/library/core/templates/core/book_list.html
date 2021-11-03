@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Libros</title>
+    </head>
+    <body>
+        <h1> Libros </h1>
+        <table>
+            {% for book in book_list %}
+                <tr>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.editorial}}</td>
+                    <td>{{book.pub_date}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

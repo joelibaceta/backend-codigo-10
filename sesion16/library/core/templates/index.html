@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1> Libros </h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th><a href="/books/?order=title">Titulo</a></th>
+            <th><a href="/books/?order=author">Autor</a></th>
+            <th><a href="/books/?order=editorial">Editorial</a></th>
+            <th><a href="/books/?order=pub_date">Fecha Publicacion</a></th>
+            <th>Basado en Funcion</th>
+            <th>Basado en Clase</th>
+            <th>Basado en Vista Generica</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.editorial}}</td>
+                <td>{{book.pub_date}}</td>
+                
+                <td><a href="/book/{{book.id}}/">Ver detalle</a></td>
+                <td><a href="/book2/{{book.id}}/">Ver detalle</a></td>
+                <td><a href="/book3/{{book.id}}/">Ver detalle</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
