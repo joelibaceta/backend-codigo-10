@@ -1,0 +1,22 @@
+<html>
+    <head>
+    </head>
+
+    <body>
+        <h1> Tareas </h1>
+
+        <form action="/tasks/" method="POST">
+            {% csrf_token %}
+            <input name="title" /> <button type="submit">Agregar</button>
+        </form>
+
+        <table>
+            {% for task in tasks %}
+                <tr> 
+                    <td>{{task.title}}</td>
+                    <td><a href="/task/{{task.id}}">Editar</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

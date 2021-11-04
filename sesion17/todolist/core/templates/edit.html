@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <form action="/task/{{task.id}}/" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+    </body>
+</html>
