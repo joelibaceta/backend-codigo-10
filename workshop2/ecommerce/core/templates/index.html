@@ -1,0 +1,178 @@
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;display=swap" rel="stylesheet">
+    
+        <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    
+        <!-- Custom StyleSheet -->
+        <link rel="stylesheet" href="/assets/styles.css">
+    
+        <title>Phone Store - eCommerce</title>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header id="header" class="header">
+            <div class="navigation fix__nav">
+            <div class="container">
+                <nav class="nav">
+                <div class="nav__hamburger">
+                    <svg>
+                    <use xlink:href="./images/sprite.svg#icon-menu"></use>
+                    </svg>
+                </div>
+
+                <div class="nav__logo">
+                    <a href="/" class="scroll-link">
+                    PHONE
+                    </a>
+                </div>
+
+                <div class="nav__menu">
+                    <div class="menu__top">
+                    <span class="nav__category">PHONE</span>
+                    <a href="#" class="close__toggle">
+                        <svg>
+                        <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                        </svg>
+                    </a>
+                    </div>
+                    <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#header" class="nav__link scroll-link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#category" class="nav__link scroll-link">Category</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#news" class="nav__link scroll-link">Blog</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link scroll-link">Contact</a>
+                    </li>
+                    </ul>
+                </div>
+
+                <div class="nav__icons">
+                    <a href="#" class="icon__item">
+                    <svg class="icon__user">
+                        <use xlink:href="./images/sprite.svg#icon-user"></use>
+                    </svg>
+                    </a>
+
+                    <a href="#" class="icon__item">
+                    <svg class="icon__search">
+                        <use xlink:href="./images/sprite.svg#icon-search"></use>
+                    </svg>
+                    </a>
+
+                    <a href="/cart" class="icon__item">
+                    <svg class="icon__cart">
+                        <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
+                    </svg>
+                    {% block cart_counter %}
+                        
+                    {% endblock %}
+                    </a>
+                </div>
+                </nav>
+            </div>
+            </div>
+
+        
+        </header>
+        <!-- End Header -->
+        <br/>
+        <main id="main">
+            <div class="container" style="padding-top: 100px; padding-bottom: 200px;">
+                {% block main_container %}
+                {% endblock %}
+                {% block second_section %}
+                {% endblock %}
+            </div>  
+        </main>
+
+          <!-- Footer -->
+        <footer id="footer" class="section footer">
+            <div class="container">
+            <div class="footer__top">
+                <div class="footer-top__box">
+                <h3>EXTRAS</h3>
+                <a href="#">Brands</a>
+                <a href="#">Gift Certificates</a>
+                <a href="#">Affiliate</a>
+                <a href="#">Specials</a>
+                <a href="#">Site Map</a>
+                </div>
+                <div class="footer-top__box">
+                <h3>INFORMATION</h3>
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms &amp; Conditions</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Site Map</a>
+                </div>
+                <div class="footer-top__box">
+                <h3>MY ACCOUNT</h3>
+                <a href="#">My Account</a>
+                <a href="#">Order History</a>
+                <a href="#">Wish List</a>
+                <a href="#">Newsletter</a>
+                <a href="#">Returns</a>
+                </div>
+                <div class="footer-top__box">
+                <h3>CONTACT US</h3>
+                <div>
+                    <span>
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-location"></use>
+                    </svg>
+                    </span>
+                    42 Dream House, Dreammy street, 7131 Dreamville, USA
+                </div>
+                <div>
+                    <span>
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-envelop"></use>
+                    </svg>
+                    </span>
+                    company@gmail.com
+                </div>
+                <div>
+                    <span>
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-phone"></use>
+                    </svg>
+                    </span>
+                    456-456-4512
+                </div>
+                <div>
+                    <span>
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-paperplane"></use>
+                    </svg>
+                    </span>
+                    Dream City, USA
+                </div>
+                </div>
+            </div>
+            </div>
+            <div class="footer__bottom">
+            <div class="footer-bottom__box">
+
+            </div>
+            <div class="footer-bottom__box">
+
+            </div>
+            </div>
+            
+        </footer>
+        <!-- End Footer -->
+
+    </body>
+

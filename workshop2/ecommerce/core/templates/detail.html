@@ -1,0 +1,153 @@
+{% extends 'index.html' %}
+
+{% block cart_counter %}
+<span id="cart__total">{{counter}}</span>
+{% endblock %}
+
+
+{% block main_container %}
+    <form action="/addToCart/" method="POST">
+        {% csrf_token %}
+        <section class="section product-details__section">
+            <div class="product-detail__container">
+            <div class="product-detail__left">
+                <div class="details__container--left">
+                <div class="product__pictures">
+                    <div class="pictures__container">
+                    <img class="picture" src="./images/products/iPhone/iphone1.jpeg" id="pic1" />
+                    </div>
+                    <div class="pictures__container">
+                    <img class="picture" src="./images/products/iPhone/iphone2.jpeg" id="pic2" />
+                    </div>
+                    <div class="pictures__container">
+                    <img class="picture" src="./images/products/iPhone/iphone3.jpeg" id="pic3" />
+                    </div>
+                    <div class="pictures__container">
+                    <img class="picture" src="./images/products/iPhone/iphone4.jpeg" id="pic4" />
+                    </div>
+                    <div class="pictures__container">
+                    <img class="picture" src="./images/products/iPhone/iphone5.jpeg" id="pic5" />
+                    </div>
+                </div>
+                <div class="product__picture" id="product__picture">
+                    <!-- <div class="rect" id="rect"></div> -->
+                    <div class="picture__container">
+                    <img src="/assets/{{product.main_picture}}" id="pic" />
+                    </div>
+                </div>
+                <div class="zoom" id="zoom"></div>
+                </div>
+
+                <div class="product-details__btn">
+                <button type="submit" class="add" href="#">
+                    <span>
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-cart-plus"></use>
+                    </svg>
+                    </span>
+                    ADD TO CART</button>
+                <a class="buy" href="#">
+                    <span>
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-credit-card"></use>
+                    </svg>
+                    </span>
+                    BUY NOW
+                </a>
+                </div>
+            </div>
+
+            <div class="product-detail__right">
+                <div class="product-detail__content">
+                <h3>{{product.title}}</h3>
+                <div class="price">
+                    <span class="new__price">$ {{product.price}}</span>
+                </div>
+                <div class="product__review">
+                    <div class="rating"> 
+                        {% for n in stars %}
+                            <img src="/assets/sprite.svg" width="24"/>
+                        {% endfor %}
+                    </div>
+                    <br/>
+                    <a href="#" class="rating__quatity">{{product.rating}} stars</a>
+                </div>
+                <p>{{product.description}}</p>
+                <div class="product__info-container">
+                    <ul class="product__info"> 
+
+                        <div class="input-counter">
+                        <span>Quantity:</span>
+                        <input name="product_id" type="hidden" value="{{product.id}}" />
+                        <div>
+                            <span class="minus-btn">
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-minus"></use>
+                            </svg>
+                            </span>
+                            <input name="quantity" type="text" min="1" value="1" max="10" class="counter-btn">
+                            <span class="plus-btn">
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-plus"></use>
+                            </svg>
+                            </span>
+                        </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <span>Subtotal:</span>
+                        <a href="#" class="new__price">$ {{product.price}}</a>
+                    </li>
+                    <li>
+                        <span>Brand:</span>
+                        <a href="#">{{product.brand}}</a>
+                    </li>
+                    <li>
+                        <span>Product Type:</span>
+                        <a href="#">{{product.category}}</a>
+                    </li>
+                    <li>
+                        <span>Availability:</span>
+                        <a href="#" class="in-stock">In Stock ({{product.stock}} Items)</a>
+                    </li>
+                    </ul> 
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="product-detail__bottom">
+                <div class="title__container tabs">
+
+                    <div class="section__titles category__titles ">
+                    <div class="section__title detail-btn active" data-id="description">
+                        <span class="dot"></span>
+                        <h1 class="primary__title">Description</h1>
+                    </div>
+                    </div>
+
+                    <div class="section__titles">
+                    <div class="section__title detail-btn" data-id="reviews">
+                        <span class="dot"></span>
+                        <h1 class="primary__title">Reviews</h1>
+                    </div>
+                    </div>
+
+                    <div class="section__titles">
+                    <div class="section__title detail-btn" data-id="shipping">
+                        <span class="dot"></span>
+                        <h1 class="primary__title">Shipping Details</h1>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="detail__content">
+                    <div class="content active" id="description">
+                        {{product.page_info | safe}}
+                    </div> 
+                </div>
+            </div>
+        </section>
+    </form>
+{% endblock %}
