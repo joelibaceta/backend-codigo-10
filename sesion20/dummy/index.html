@@ -1,0 +1,74 @@
+<html>
+    <body>
+        <form>
+            <fieldset>
+                <span> Amount <input id="amount" value="100.0"/></span>
+            </fieldset>
+            <fieldset>
+            <span> Card Number <input id="cardNumber" /></span>
+            </fieldset> 
+            <fieldset>
+                <span> Exp. Year <input id="expYear" /></span>
+                <span> Exp. Month <input id="expMonth" /></span>
+            
+            </fieldset>
+            <a href="javascript:doPay()"> Pagar </a>
+        </form>
+        <script>
+            
+
+            var tokenUrl = "http://localhost:8000/tokens/";
+            var paymentUrl = "http://localhost:8000/payments/";
+            
+
+            function executePayment(data) {
+                var amount = document.getElementById("amount").value;
+
+                fetch(paymentUrl, {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        "amount": amount,
+                        "token": data.token,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(
+                    response => console.log("Token: ", response)
+                )
+                .catch(error => console.error("Error:", error))
+            }
+
+            function doPay() {
+                
+                var cardNumber = document.getElementById("cardNumber").value;
+                var expYear = document.getElementById("expYear").value;
+                var expMonth = document.getElementById("expMonth").value;
+                fetch(tokenUrl, {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        "card_number": cardNumber,
+                        "card_holder": "Payer",
+                        "exp_month": expMonth,
+                        "exp_year": expYear
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(
+                    response => {
+                        console.log("Token: ", response);
+                        executePayment(response);
+                    }
+                )
+                .catch(error => console.error("Error:", error))
+            }
+        </script>
+    </body>
+</html>
