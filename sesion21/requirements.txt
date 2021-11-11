@@ -3,3 +3,4 @@ djangorestframework
 pymysql
 cryptography
 django-cors-headers
+django-referrer-policy
