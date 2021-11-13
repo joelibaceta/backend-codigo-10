@@ -134,6 +134,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "SIGNING_KEY": "#QeJSPeA]3)*>XU9p3^Sbvy2HJ(U,h&7V)xHNi2{XdW_y(#B`)*#]D'v&A2A':WwrS@r)sLnW.Sk=W.[A/H;Zwi,/sR;ZLa|VQi",
     "ALGORITHM": "HS512",
-    "BLACKLIST_AFTER_ROTATION": True
+    "BLACKLIST_AFTER_ROTATION": True,
+    
 
 }
