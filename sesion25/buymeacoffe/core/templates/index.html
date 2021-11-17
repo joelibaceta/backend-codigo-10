@@ -1,0 +1,168 @@
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <center>
+        <h1> Buy me coffe!</h1>
+
+        <a href="{{payment_url}}">Comprar (S./ 12)</a>
+        <br/><br/>
+        <form method="post" action="/create_button/">
+            {% csrf_token %}
+            Donar S./<input name="amount" /> <button type="submit">Enviar</button>
+        </form>
+    </center>
+
+    <center>
+        <form id="form-checkout" autocomplete="off" >
+            {% csrf_token %}
+            <fieldset>
+                <legend>Card</legend>
+                <input type="text" name="cardNumber" id="form-checkout__cardNumber" />
+                <br/>
+                <input type="text" name="cardExpirationMonth" id="form-checkout__cardExpirationMonth" />
+                <input type="text" name="cardExpirationYear" id="form-checkout__cardExpirationYear" />
+                <br/>
+                <input type="text" name="securityCode" id="form-checkout__securityCode" />
+                
+            </fieldset>
+            <br/>
+            <fieldset>
+                <legend>Payer</legend>
+                <input type="text" name="cardholderName" id="form-checkout__cardholderName"/>
+                <br/>
+                <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail"/>
+                <br/>
+                <select name="identificationType" id="form-checkout__identificationType"></select>
+                <br/>
+                <input type="text" name="identificationNumber" id="form-checkout__identificationNumber"/>
+                <br/>
+            </fieldset>
+            <br/>
+            <fieldset>
+                <select name="issuer" id="form-checkout__issuer"></select>
+                <br/>
+                
+                <select name="installments" id="form-checkout__installments"></select>
+                <br/>
+            </fieldset>
+            <button type="submit" id="form-checkout__submit">Pagar</button>
+            <progress value="0" class="progress-bar">Cargando...</progress>
+         </form>
+    </center>
+
+    <script>
+        const mp = new MercadoPago('TEST-57d08b98-b679-4f9e-9ecc-7268f48c3b62');
+        // Add step #3
+        // Step #3
+        const cardForm = mp.cardForm({
+        amount: "100.5",
+        autoMount: true,
+        form: {
+            id: "form-checkout",
+            cardholderName: {
+            id: "form-checkout__cardholderName",
+            placeholder: "Titular de la tarjeta",
+            },
+            cardholderEmail: {
+            id: "form-checkout__cardholderEmail",
+            placeholder: "E-mail",
+            },
+            cardNumber: {
+            id: "form-checkout__cardNumber",
+            placeholder: "Número de la tarjeta",
+            },
+            cardExpirationMonth: {
+            id: "form-checkout__cardExpirationMonth",
+            placeholder: "Mes de vencimiento",
+            },
+            cardExpirationYear: {
+            id: "form-checkout__cardExpirationYear",
+            placeholder: "Año de vencimiento",
+            },
+            securityCode: {
+            id: "form-checkout__securityCode",
+            placeholder: "Código de seguridad",
+            },
+            installments: {
+            id: "form-checkout__installments",
+            placeholder: "Cuotas",
+            },
+            identificationType: {
+            id: "form-checkout__identificationType",
+            placeholder: "Tipo de documento",
+            },
+            identificationNumber: {
+            id: "form-checkout__identificationNumber",
+            placeholder: "Número de documento",
+            },
+            issuer: {
+            id: "form-checkout__issuer",
+            placeholder: "Banco emisor",
+            },
+        },
+        callbacks: {
+            onFormMounted: error => {
+            if (error) return console.warn("Form Mounted handling error: ", error);
+            console.log("Form mounted");
+            },
+            onSubmit: event => {
+            event.preventDefault();
+
+            const {
+                paymentMethodId: payment_method_id,
+                issuerId: issuer_id,
+                cardholderEmail: email,
+                amount,
+                token,
+                installments,
+                identificationNumber,
+                identificationType,
+            } = cardForm.getCardFormData();
+
+            fetch("/process_payment/", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                token,
+                issuer_id,
+                payment_method_id,
+                transaction_amount: Number(amount),
+                installments: Number(installments),
+                description: "Descripción del producto",
+                payer: {
+                    email,
+                    identification: {
+                    type: identificationType,
+                    number: identificationNumber,
+                    },
+                },
+                }),
+            });
+            },
+            onFetching: (resource) => {
+            console.log("Fetching resource: ", resource);
+
+            // Animate progress bar
+            const progressBar = document.querySelector(".progress-bar");
+            progressBar.removeAttribute("value");
+
+            return () => {
+                progressBar.setAttribute("value", "0");
+            };
+            },
+        },
+        });
+    </script>
+</body>
+
+</html>
