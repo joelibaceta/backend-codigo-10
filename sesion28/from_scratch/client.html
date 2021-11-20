@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>WebSocket Client</title>
+</head>
+
+<body>
+    <input id="message" /> <a href="javascript:send_message()">Enviar</a>
+    <div id="historial"></div>
+
+    <script>
+        const socket = new WebSocket("ws://localhost:7000")
+        const historial = document.getElementById("historial")
+
+        socket.addEventListener('open', function(event){
+            socket.send('Connection Established');
+        })
+
+        socket.addEventListener('message', function(event){
+            var line = document.createElement("P");
+            line.innerText = event.data
+            historial.appendChild(line)
+            console.log(event.data);
+        })
+
+        function send_message() {
+            let input =  document.getElementById("message")
+            socket.send(input.value)
+        }
+    </script>
+</body>
+</html>

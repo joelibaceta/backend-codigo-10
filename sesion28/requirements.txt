@@ -1,0 +1,5 @@
+websocket-client
+websockets
+django
+django-channels
+channels
