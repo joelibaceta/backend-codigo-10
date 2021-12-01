@@ -1,0 +1,6 @@
+django
+pymongo
+djangorestframework
+dnspython
+boto3
+django-storages
