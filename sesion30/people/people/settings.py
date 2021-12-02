@@ -121,9 +121,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-AWS_ACCESS_KEY_ID = "AKIA5SLIYVKVJF5EJ37A"
-AWS_SECRET_ACCESS_KEY = "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"
-AWS_STORAGE_BUCKET_NAME = "djangos3codigo10"
+AWS_ACCESS_KEY_ID = ""
+AWS_SECRET_ACCESS_KEY = ""
+AWS_STORAGE_BUCKET_NAME = ""
 
 AWS_S3_CUSTOM_DOMAIN="djangos3codigo10.s3.us-east-2.amazonaws.com"
 
