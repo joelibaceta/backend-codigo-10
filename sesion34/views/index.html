@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>Chat</title>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+
+    <body>
+        <h1> Chat </h1>
+
+        <ul id="messages">
+
+        </ul>
+
+        <form>
+            <input id="message" type="text" />
+            <div id="status"></div>
+            <button> Send </button>
+        </form>
+
+        <script>
+            
+
+            const socket = io();
+
+            var username = prompt("Ingrese su nombre: ")
+
+            const form = document.querySelector("form")
+            const input = document.getElementById("message")
+            const statusDiv = document.getElementById("status")
+
+            var is_writting = false;
+            
+            socket.emit("user_join", username)
+
+            socket.on("user_join", function(data){
+                console.log("user_join event")
+                addMessage("Hola, " + data + " bienvenido al chat")
+            })
+
+            socket.on("chat_message", function(data){
+                addMessage(data.username + " : " + data.message)
+            })
+
+            socket.on("is_writting", function(data){
+                console.log("is_writting")
+                if (is_writting == false) {
+                    is_writting = true
+                    statusDiv.innerText= data + " esta escribiendo ..."
+                    setTimeout(function(){
+                        statusDiv.innerText=""
+                        is_writting=false
+                    }, 1000)
+                }
+            })
+
+            socket.on("user_leave", function(data){
+                addMessage(data + " ha salido de la sala")
+            })
+
+            input.addEventListener("keypress", function(event){
+                console.log("escribiendo")
+                socket.emit("is_writting")
+            })
+
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                addMessage(username + " : " + input.value)
+
+                socket.emit("chat_message", {
+                    username: username,
+                    message: input.value
+                })
+                input.value = ""
+                return false
+            }, false)
+
+            function addMessage(message) {
+                const messages = document.getElementById("messages")
+                const li = document.createElement("li")
+                li.innerText=message
+                messages.appendChild(li)
+            }
+
+        </script>
+    </body>
+</html>
