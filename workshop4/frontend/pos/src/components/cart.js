@@ -38,7 +38,6 @@ const Cart = forwardRef((props, ref) => {
         axios.get("http://localhost:5000/cart_items")
             .then((res) => {
                 setCartProductList(res.data)
-                getTotal()
             })
             .catch(err=>console.log(err))
     }
@@ -66,7 +65,9 @@ const Cart = forwardRef((props, ref) => {
             .catch(err => console.log(err))
     }
 
-   
+    useEffect(() => {
+        getTotal()
+    }, [cartProductList])
      
 
     return (
