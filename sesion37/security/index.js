@@ -2,6 +2,7 @@
 const express = require('express')
 
 const Redis = require('ioredis');
+const { BusEventHandlers } = require('./handlers')
 
 const subredis = new Redis()
 const pubredis = new Redis()
@@ -18,26 +19,10 @@ subredis.subscribe("user-logged", () => {
 })
 
 subredis.on("message", (channel, message) => {
-    if (channel == "service-loaded") {
-        onServiceLoad(message)
-    } 
-    if (channel == "user-logged") {
-        console.log(message)
-        if (message == "user1") {
-            console.log("Alert: " + message + "session has been detected")
-        }
-    }
+    BusEventHandlers.handle(channel, message, pubredis)
 })
 
-app.get('/', (req, res) => {
-    res.send('Hello World')
-    
-})
-
-function onServiceLoad(message) {
-    //if (err) console.error(err.message)
-    console.log("A new service has been loaded: " + message)
-}
+app.get('/', (req, res) => { res.send('Hello World') })
 
 app.listen(port, () => {
     console.log('Auth Server Listening')

@@ -19,6 +19,10 @@ subredis.subscribe("service-loaded", () => {
     console.log("Suscribed to service-loaded topic ")
 })
 
+subredis.subscribe("user_banned_detected", ()=>{
+    console.log("Suscribed to user_banned_detected topic ")
+})
+
 subredis.on("message", AuthChannels.manage)
 
 app.get('/', (req, res) => {res.send('Hello World')})
