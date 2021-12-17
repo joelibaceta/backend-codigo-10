@@ -1,6 +1,8 @@
 env1
 __pycache__
 node_modules
+sesion38/python
+
 env2
 env3
 env4
@@ -27,5 +29,6 @@ env24
 env25
 env26
 env27 
+env28
 
 .env
